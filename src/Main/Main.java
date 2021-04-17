@@ -1,19 +1,21 @@
 package Main;
 
 import com.formdev.flatlaf.FlatDarkLaf;
-import javax.swing.JCheckBox;
+import javax.swing.table.DefaultTableModel;
+
 
 /**
  *
  * @author angel_p11
  */
 public class Main extends javax.swing.JFrame {
-
+    Analizer analizer;
     /**
      * Creates new form Main
      */
     public Main() {
         initComponents();
+        analizer = new Analizer("",this.inputArea,this.outputArea);
         setLocationRelativeTo(null);
         customCells();
     }
@@ -45,6 +47,8 @@ public class Main extends javax.swing.JFrame {
         table = new javax.swing.JPanel();
         scroll3 = new javax.swing.JScrollPane();
         outputTable = new javax.swing.JTable();
+        execute = new javax.swing.JButton();
+        reset = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("SQL Analizer");
@@ -52,7 +56,8 @@ public class Main extends javax.swing.JFrame {
 
         container.setLayout(new java.awt.GridBagLayout());
 
-        input.setPreferredSize(new java.awt.Dimension(720, 250));
+        input.setPreferredSize(new java.awt.Dimension(720, 220));
+        input.setRequestFocusEnabled(false);
         input.setLayout(new java.awt.GridLayout());
 
         inputArea.setColumns(20);
@@ -64,13 +69,15 @@ public class Main extends javax.swing.JFrame {
         input.add(scroll1);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         container.add(input, gridBagConstraints);
 
-        output.setPreferredSize(new java.awt.Dimension(360, 250));
+        output.setPreferredSize(new java.awt.Dimension(360, 220));
         output.setLayout(new java.awt.GridLayout());
 
         outputArea.setEditable(false);
@@ -84,13 +91,13 @@ public class Main extends javax.swing.JFrame {
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         container.add(output, gridBagConstraints);
 
-        table.setPreferredSize(new java.awt.Dimension(360, 250));
+        table.setPreferredSize(new java.awt.Dimension(360, 220));
         table.setLayout(new java.awt.GridLayout());
 
         outputTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -122,16 +129,61 @@ public class Main extends javax.swing.JFrame {
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         container.add(table, gridBagConstraints);
 
+        execute.setText("Execute");
+        execute.setPreferredSize(new java.awt.Dimension(200, 30));
+        execute.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                executeActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        container.add(execute, gridBagConstraints);
+
+        reset.setText("Reset");
+        reset.setPreferredSize(new java.awt.Dimension(200, 30));
+        reset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resetActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        container.add(reset, gridBagConstraints);
+
         getContentPane().add(container, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void executeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_executeActionPerformed
+        analizer.setText(inputArea.getText());
+        analizer.execute();
+    }//GEN-LAST:event_executeActionPerformed
+
+    private void resetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetActionPerformed
+        inputArea.setText("");
+        outputArea.setText("");
+        DefaultTableModel model = (DefaultTableModel) outputTable.getModel();
+        for (int i = outputTable.getRowCount() - 1; i >= 0; i--) {
+            model.removeRow(i);
+        }
+        
+    }//GEN-LAST:event_resetActionPerformed
 
     /**
      * @param args the command line arguments
@@ -158,11 +210,13 @@ public class Main extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel container;
+    private javax.swing.JButton execute;
     private javax.swing.JPanel input;
     private javax.swing.JTextArea inputArea;
     private javax.swing.JPanel output;
     private javax.swing.JTextArea outputArea;
     private javax.swing.JTable outputTable;
+    private javax.swing.JButton reset;
     private javax.swing.JScrollPane scroll1;
     private javax.swing.JScrollPane scroll2;
     private javax.swing.JScrollPane scroll3;
