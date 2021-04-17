@@ -166,8 +166,8 @@ public class Analizer {
     }
 
     private final String A = "^(SELECT +(.)+ +FROM +\\w+) *$";
-    private final String B = "^(SELECT +(.)+ +FROM +\\w+) *ORDER *BY *\\w+ *(ASC|DESC) *$";
-    private final String C = "^(SELECT +(.)+ +FROM +\\w+) *WHERE *(\\w+ *= *(\\d+|\".+\")) *$";
-    private final String D = "^(SELECT +(.)+ +FROM +\\w+) *WHERE *(\\w+ *= *(\\d+|\".+\")) *ORDER *BY *\\w+ *(ASC|DESC) *$";
+    private final String B = "^(SELECT +(.)+ +FROM +\\w+) +ORDER +BY +\\w+ +(ASC|DESC) *$";
+    private final String C = "^(SELECT +(.)+ +FROM +\\w+) +WHERE +(\\w+ *= *(\\d+|\".+\")) *$";
+    private final String D = "^(SELECT +(.)+ +FROM +\\w+) +WHERE +(\\w+ *= *(\\d+|\".+\")) +ORDER +BY +\\w+ +(ASC|DESC) *$";
 
 }
