@@ -102,11 +102,27 @@ public class Analizer {
                 c.ps = (PreparedStatement) c.conexion.prepareStatement(query);
                 c.rs = c.ps.executeQuery();
                 while (c.rs.next()) {
-                    int cols = c.rs.getMetaData().getColumnCount();
                     DefaultTableModel model = (DefaultTableModel) outputTable.getModel();
-                    Object[] row = new Object[cols];
-                    for (int i = 1; i <= cols; i++) {
-                        row[i-1] = c.rs.getObject(i);
+                    Object[] row = new Object[4];
+                    try {
+                        row[0] = c.rs.getInt("id");
+                    } catch (SQLException e) {
+                        row[0] = "";
+                    }
+                    try {
+                        row[1] = c.rs.getString("nombre");
+                    } catch (SQLException e) {
+                        row[1] = "";
+                    }
+                    try {
+                        row[2] = c.rs.getInt("edad");
+                    } catch (SQLException e) {
+                        row[2] = "";
+                    }
+                    try {
+                        row[3] = c.rs.getBoolean("estado");
+                    } catch (SQLException e) {
+                        row[3] = "";
                     }
                     model.addRow(row);
                 }
