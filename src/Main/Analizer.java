@@ -49,6 +49,20 @@ public class Analizer {
             } else {
                 outputArea.setText(validateSelect(s.trim()));
             }
+        } else if (text.trim().matches(C)) {
+            String s = text.replaceAll("FROM.*", "").replace("SELECT", "");
+            String t = text.replace("SELECT", "").replace("FROM", "").replace(s, "").replaceAll("WHERE.*", "");
+            String w = text.replace(t, "").replace(s, "").replace("SELECT", "").replace("FROM", "").replace("WHERE", "").trim();
+            if (validateSelect(s.trim()).isEmpty()) {
+                outputArea.setText("SELECCIONAR\n"
+                        + "\t" + s.trim().replace(" ", "") + "\n"
+                        + "DE\n"
+                        + "\t" + t + "\n"
+                        + "DONDE\n"
+                        + "\t" + w.trim().replace(" ", ""));
+            } else {
+                outputArea.setText(validateSelect(s.trim()));
+            }
         }
     }
 
@@ -87,5 +101,6 @@ public class Analizer {
 
     private final String A = "^(SELECT +(.)+ +FROM +\\w+) *$";
     private final String B = "^(SELECT +(.)+ +FROM +\\w+) *ORDER *BY *(ASC|DESC) *$";
+    private final String C = "^(SELECT +(.)+ +FROM +\\w+) *WHERE *(\\w+ *= *(\\d+|\".+\")) *$";
 
 }

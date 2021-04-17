@@ -83,7 +83,7 @@ public class Main extends javax.swing.JFrame {
 
         outputArea.setEditable(false);
         outputArea.setColumns(15);
-        outputArea.setFont(new java.awt.Font("Lucida Grande", 0, 20)); // NOI18N
+        outputArea.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         outputArea.setRows(5);
         outputArea.setTabSize(2);
         outputArea.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Output", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Grande", 0, 15))); // NOI18N
