@@ -127,19 +127,19 @@ public class Analizer {
                     model.addRow(row);
                 }
             } catch (SQLException e) {
-                System.err.println(e);
+
             }
         }
     }
 
     public String spanish(String t) {
-        switch (t) {
-            case ASC:
-                return "ASCENDENTEMENTE";
-            case DESC:
-                return "DESCENDENTEMENTE";
-            default:
-                return t;
+
+        if (t.contains("ASC")) {
+            return "ASCENDENTEMENTE";
+        } else if (t.contains("DESC")) {
+            return "DESCENDENTEMENTE";
+        } else {
+            return t;
         }
     }
 
@@ -166,8 +166,8 @@ public class Analizer {
     }
 
     private final String A = "^(SELECT +(.)+ +FROM +\\w+) *$";
-    private final String B = "^(SELECT +(.)+ +FROM +\\w+) *ORDER *BY *(ASC|DESC) *$";
+    private final String B = "^(SELECT +(.)+ +FROM +\\w+) *ORDER *BY *\\w+ *(ASC|DESC) *$";
     private final String C = "^(SELECT +(.)+ +FROM +\\w+) *WHERE *(\\w+ *= *(\\d+|\".+\")) *$";
-    private final String D = "^(SELECT +(.)+ +FROM +\\w+) *WHERE *(\\w+ *= *(\\d+|\".+\")) *ORDER *BY *(ASC|DESC) *$";
+    private final String D = "^(SELECT +(.)+ +FROM +\\w+) *WHERE *(\\w+ *= *(\\d+|\".+\")) *ORDER *BY *\\w+ *(ASC|DESC) *$";
 
 }
