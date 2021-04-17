@@ -3,24 +3,25 @@ package Main;
 import com.formdev.flatlaf.FlatDarkLaf;
 import javax.swing.table.DefaultTableModel;
 
-
 /**
  *
  * @author angel_p11
  */
 public class Main extends javax.swing.JFrame {
+
     Analizer analizer;
+
     /**
      * Creates new form Main
      */
     public Main() {
         initComponents();
-        analizer = new Analizer("",this.inputArea,this.outputArea);
+        analizer = new Analizer("", this.inputArea, this.outputArea, this.outputTable);
         setLocationRelativeTo(null);
         customCells();
     }
-    
-    public void customCells(){
+
+    public void customCells() {
         this.outputTable.getColumnModel().getColumn(0).setCellRenderer(new CustomCell("number"));
         this.outputTable.getColumnModel().getColumn(1).setCellRenderer(new CustomCell("text"));
         this.outputTable.getColumnModel().getColumn(2).setCellRenderer(new CustomCell("number"));
@@ -126,6 +127,12 @@ public class Main extends javax.swing.JFrame {
             }
         });
         scroll3.setViewportView(outputTable);
+        if (outputTable.getColumnModel().getColumnCount() > 0) {
+            outputTable.getColumnModel().getColumn(0).setPreferredWidth(25);
+            outputTable.getColumnModel().getColumn(1).setPreferredWidth(200);
+            outputTable.getColumnModel().getColumn(2).setPreferredWidth(30);
+            outputTable.getColumnModel().getColumn(3).setPreferredWidth(50);
+        }
 
         table.add(scroll3);
 
@@ -177,6 +184,10 @@ public class Main extends javax.swing.JFrame {
 
     private void executeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_executeActionPerformed
         analizer.setText(inputArea.getText());
+        DefaultTableModel model = (DefaultTableModel) outputTable.getModel();
+        for (int i = outputTable.getRowCount() - 1; i >= 0; i--) {
+            model.removeRow(i);
+        }
         analizer.execute();
     }//GEN-LAST:event_executeActionPerformed
 
@@ -187,7 +198,7 @@ public class Main extends javax.swing.JFrame {
         for (int i = outputTable.getRowCount() - 1; i >= 0; i--) {
             model.removeRow(i);
         }
-        
+
     }//GEN-LAST:event_resetActionPerformed
 
     /**

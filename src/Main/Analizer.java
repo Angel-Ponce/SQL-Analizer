@@ -1,6 +1,10 @@
 package Main;
 
+import com.mysql.jdbc.PreparedStatement;
+import java.sql.SQLException;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -18,14 +22,17 @@ public class Analizer {
     private String text;
     private JTextArea inputArea;
     private JTextArea outputArea;
+    private JTable outputTable;
 
-    public Analizer(String text, JTextArea inputArea, JTextArea outputArea) {
+    public Analizer(String text, JTextArea inputArea, JTextArea outputArea, JTable outputTable) {
         this.text = text;
         this.inputArea = inputArea;
         this.outputArea = outputArea;
+        this.outputTable = outputTable;
     }
 
     public void execute() {
+        text = text.replaceAll("\n", " ");
         if (text.trim().matches(A)) {
             String s = text.replaceAll("FROM.*", "").replace("SELECT", "");
             String t = text.replace("SELECT", "").replace("FROM", "").replace(s, "");
@@ -34,6 +41,7 @@ public class Analizer {
                         + "\t" + s.trim().replace(" ", "") + "\n"
                         + "DE\n"
                         + "\t" + t);
+                database(t, text.trim());
             } else {
                 outputArea.setText(validateSelect(s.trim()));
             }
@@ -46,6 +54,7 @@ public class Analizer {
                         + "DE\n"
                         + "\t" + t + "\n"
                         + "ORDENAR " + spanish(text.replace(t, "").replace(s, "").replace("SELECT", "").replace("FROM", "").replace("ORDER", "").replace("BY", "").replace(" ", "")));
+                database(t, text.trim());
             } else {
                 outputArea.setText(validateSelect(s.trim()));
             }
@@ -60,6 +69,7 @@ public class Analizer {
                         + "\t" + t + "\n"
                         + "DONDE\n"
                         + "\t" + w.trim());
+                database(t, text.trim());
             } else {
                 outputArea.setText(validateSelect(s.trim()));
             }
@@ -75,11 +85,34 @@ public class Analizer {
                         + "DONDE\n"
                         + "\t" + w.trim() + "\n"
                         + "ORDENAR " + spanish(text.replace("SELECT", "").replace(s, "").replace("FROM", "").replace(t, "").replace("WHERE", "").replace(w, "").replace("ORDER", "").replace("BY", "").replace(" ", "")));
+                database(t, text.trim());
             } else {
                 outputArea.setText(validateSelect(s.trim()));
             }
-        }else{
+        } else {
             outputArea.setText("SYNTAX ERROR");
+        }
+    }
+
+    public void database(String table, String query) {
+        if (table.trim().equals("usuario")) {
+            Connecter c = new Connecter();
+            try {
+                c.conexion = c.getConexion();
+                c.ps = (PreparedStatement) c.conexion.prepareStatement(query);
+                c.rs = c.ps.executeQuery();
+                while (c.rs.next()) {
+                    int cols = c.rs.getMetaData().getColumnCount();
+                    DefaultTableModel model = (DefaultTableModel) outputTable.getModel();
+                    Object[] row = new Object[cols];
+                    for (int i = 1; i <= cols; i++) {
+                        row[i-1] = c.rs.getObject(i);
+                    }
+                    model.addRow(row);
+                }
+            } catch (SQLException e) {
+                System.err.println(e);
+            }
         }
     }
 

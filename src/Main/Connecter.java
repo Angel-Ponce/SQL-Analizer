@@ -16,7 +16,7 @@ public class Connecter {
      *
      * @author Angel
      */
-    public static final String URL = "jdbc:mysql://192.168.64.2/test?useSSL=false";
+    public static final String URL = "jdbc:mysql://192.168.64.2/analizer?useSSL=false";
     public static final String user = "Angel";
     public static final String password = "!T(R6u7d1M9xJEw!";
     public PreparedStatement ps;
