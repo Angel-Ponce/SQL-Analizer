@@ -52,17 +52,34 @@ public class Analizer {
         } else if (text.trim().matches(C)) {
             String s = text.replaceAll("FROM.*", "").replace("SELECT", "");
             String t = text.replace("SELECT", "").replace("FROM", "").replace(s, "").replaceAll("WHERE.*", "");
-            String w = text.replace(t, "").replace(s, "").replace("SELECT", "").replace("FROM", "").replace("WHERE", "").trim();
+            String w = text.replace(t, "").replace(s, "").replace("SELECT", "").replace("FROM", "").replace("WHERE", "");
             if (validateSelect(s.trim()).isEmpty()) {
                 outputArea.setText("SELECCIONAR\n"
                         + "\t" + s.trim().replace(" ", "") + "\n"
                         + "DE\n"
                         + "\t" + t + "\n"
                         + "DONDE\n"
-                        + "\t" + w.trim().replace(" ", ""));
+                        + "\t" + w.trim());
             } else {
                 outputArea.setText(validateSelect(s.trim()));
             }
+        } else if (text.trim().matches(D)) {
+            String s = text.replaceAll("FROM.*", "").replace("SELECT", "");
+            String t = text.replace("SELECT", "").replace("FROM", "").replace(s, "").replaceAll("WHERE.*", "");
+            String w = text.replace(t, "").replace(s, "").replace("SELECT", "").replace("FROM", "").replace("WHERE", "").replaceAll("ORDER.*", "");
+            if (validateSelect(s.trim()).isEmpty()) {
+                outputArea.setText("SELECCIONAR\n"
+                        + "\t" + s.trim().replace(" ", "") + "\n"
+                        + "DE\n"
+                        + "\t" + t + "\n"
+                        + "DONDE\n"
+                        + "\t" + w.trim() + "\n"
+                        + "ORDENAR " + spanish(text.replace("SELECT", "").replace(s, "").replace("FROM", "").replace(t, "").replace("WHERE", "").replace(w, "").replace("ORDER", "").replace("BY", "").replace(" ", "")));
+            } else {
+                outputArea.setText(validateSelect(s.trim()));
+            }
+        }else{
+            outputArea.setText("SYNTAX ERROR");
         }
     }
 
@@ -102,5 +119,6 @@ public class Analizer {
     private final String A = "^(SELECT +(.)+ +FROM +\\w+) *$";
     private final String B = "^(SELECT +(.)+ +FROM +\\w+) *ORDER *BY *(ASC|DESC) *$";
     private final String C = "^(SELECT +(.)+ +FROM +\\w+) *WHERE *(\\w+ *= *(\\d+|\".+\")) *$";
+    private final String D = "^(SELECT +(.)+ +FROM +\\w+) *WHERE *(\\w+ *= *(\\d+|\".+\")) *ORDER *BY *(ASC|DESC) *$";
 
 }
