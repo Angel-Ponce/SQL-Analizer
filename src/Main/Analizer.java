@@ -28,7 +28,7 @@ public class Analizer {
             String t = text.replaceAll("FROM.*", "").replace("SELECT", "");
             if (validateSelect(t.trim()).isEmpty()) {
                 outputArea.setText("SELECCIONAR\n"
-                        + "\t" + t.trim() + "\n"
+                        + "\t" + t.trim().replace(" ", "") + "\n"
                         + "DE\n"
                         + "\t" + text.replace("SELECT", "").replace("FROM", "").replace(t, ""));
             }
