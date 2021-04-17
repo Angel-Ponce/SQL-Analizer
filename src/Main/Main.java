@@ -137,6 +137,9 @@ public class Main extends javax.swing.JFrame {
         gridBagConstraints.weighty = 1.0;
         container.add(table, gridBagConstraints);
 
+        execute.setBackground(new java.awt.Color(102, 255, 102));
+        execute.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
+        execute.setForeground(new java.awt.Color(51, 51, 51));
         execute.setText("Execute");
         execute.setPreferredSize(new java.awt.Dimension(200, 30));
         execute.addActionListener(new java.awt.event.ActionListener() {
@@ -151,6 +154,8 @@ public class Main extends javax.swing.JFrame {
         gridBagConstraints.weightx = 1.0;
         container.add(execute, gridBagConstraints);
 
+        reset.setBackground(new java.awt.Color(255, 51, 51));
+        reset.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
         reset.setText("Reset");
         reset.setPreferredSize(new java.awt.Dimension(200, 30));
         reset.addActionListener(new java.awt.event.ActionListener() {
