@@ -24,24 +24,29 @@ public class Analizer {
     }
 
     public void execute() {
-        if (text.matches(regex1)) {
-            String[] elements = text.split(" ");
-            outputArea.setText(validateSelect(elements[1], text));
-        } else {
-            outputArea.setText("SYNTAX ERROR");
+        if (text.trim().matches(A)) {
+            String t = text.replaceAll("FROM.*", "").replace("SELECT", "");
+            if (validateSelect(t.trim()).isEmpty()) {
+                outputArea.setText("SELECCIONAR\n"
+                        + "\t" + t.trim() + "\n"
+                        + "DE\n"
+                        + "\t" + text.replace("SELECT", "").replace("FROM", "").replace(t, ""));
+            }
+        } else if (true) {
+
         }
     }
 
-    public String validateSelect(String e, String text) {
+    public String validateSelect(String e) {
         if (e.matches("\\w+")) {
-            return text;
+            return "";
         } else if (e.matches("\\*")) {
-            return text;
+            return "";
         } else if (e.matches(".+,.+")) {
             String init = String.valueOf(e.charAt(0));
             String end = String.valueOf(e.charAt(e.length() - 1));
             if (init.matches("\\w") && end.matches("\\w")) {
-                return text;
+                return "";
             } else {
                 return "SYNTAX ERROR NEAR " + e;
             }
@@ -54,21 +59,7 @@ public class Analizer {
         this.text = text;
     }
 
-    public String toSpanish(String v) {
-        switch (v) {
-            case SELECT:
-                return "SELECCIONAR";
-            case FROM:
-                return "DE";
-            case ORDERBY:
-                return "ORDENAR POR";
-            case WHERE:
-                return "DONDE";
-            default:
-                return v;
-        }
-    }
-
-    private String regex1 = "^(SELECT +(.)+ +FROM +\\w+) *;$";
+    private final String A = "^(SELECT +(.)+ +FROM +\\w+) *$";
+    private final String B = "";
 
 }

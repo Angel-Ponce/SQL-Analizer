@@ -58,11 +58,12 @@ public class Main extends javax.swing.JFrame {
 
         input.setPreferredSize(new java.awt.Dimension(720, 220));
         input.setRequestFocusEnabled(false);
-        input.setLayout(new java.awt.GridLayout());
+        input.setLayout(new java.awt.GridLayout(1, 0));
 
         inputArea.setColumns(20);
         inputArea.setFont(new java.awt.Font("Lucida Grande", 0, 20)); // NOI18N
         inputArea.setRows(5);
+        inputArea.setTabSize(2);
         inputArea.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Input", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Grande", 1, 15))); // NOI18N
         scroll1.setViewportView(inputArea);
 
@@ -78,12 +79,13 @@ public class Main extends javax.swing.JFrame {
         container.add(input, gridBagConstraints);
 
         output.setPreferredSize(new java.awt.Dimension(360, 220));
-        output.setLayout(new java.awt.GridLayout());
+        output.setLayout(new java.awt.GridLayout(1, 0));
 
         outputArea.setEditable(false);
-        outputArea.setColumns(20);
+        outputArea.setColumns(15);
         outputArea.setFont(new java.awt.Font("Lucida Grande", 0, 20)); // NOI18N
         outputArea.setRows(5);
+        outputArea.setTabSize(2);
         outputArea.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Output", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Grande", 0, 15))); // NOI18N
         scroll2.setViewportView(outputArea);
 
@@ -98,7 +100,7 @@ public class Main extends javax.swing.JFrame {
         container.add(output, gridBagConstraints);
 
         table.setPreferredSize(new java.awt.Dimension(360, 220));
-        table.setLayout(new java.awt.GridLayout());
+        table.setLayout(new java.awt.GridLayout(1, 0));
 
         outputTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -145,9 +147,8 @@ public class Main extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
         container.add(execute, gridBagConstraints);
 
         reset.setText("Reset");
@@ -160,9 +161,8 @@ public class Main extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
         container.add(reset, gridBagConstraints);
 
         getContentPane().add(container, java.awt.BorderLayout.CENTER);
