@@ -39,7 +39,7 @@ public class Analizer {
             if (validateSelect(s.trim()).isEmpty()) {
                 outputArea.setText("SELECCIONAR\n"
                         + "\t" + s.trim().replace(" ", "") + "\n"
-                        + "DE\n"
+                        + "DE LA TABLA\n"
                         + "\t" + t);
                 database(t, text.trim());
             } else {
@@ -51,7 +51,7 @@ public class Analizer {
             if (validateSelect(s.trim()).isEmpty()) {
                 outputArea.setText("SELECCIONAR\n"
                         + "\t" + s.trim().replace(" ", "") + "\n"
-                        + "DE\n"
+                        + "DE LA TABLA\n"
                         + "\t" + t + "\n"
                         + "ORDENAR " + spanish(text.replace(t, "").replace(s, "").replace("SELECT", "").replace("FROM", "").replace("ORDER", "").replace("BY", "").replace(" ", "")));
                 database(t, text.trim());
@@ -65,7 +65,7 @@ public class Analizer {
             if (validateSelect(s.trim()).isEmpty()) {
                 outputArea.setText("SELECCIONAR\n"
                         + "\t" + s.trim().replace(" ", "") + "\n"
-                        + "DE\n"
+                        + "DE LA TABLA\n"
                         + "\t" + t + "\n"
                         + "DONDE\n"
                         + "\t" + w.trim());
@@ -80,7 +80,7 @@ public class Analizer {
             if (validateSelect(s.trim()).isEmpty()) {
                 outputArea.setText("SELECCIONAR\n"
                         + "\t" + s.trim().replace(" ", "") + "\n"
-                        + "DE\n"
+                        + "DE LA TABLA\n"
                         + "\t" + t + "\n"
                         + "DONDE\n"
                         + "\t" + w.trim() + "\n"
@@ -90,7 +90,7 @@ public class Analizer {
                 outputArea.setText(validateSelect(s.trim()));
             }
         } else {
-            outputArea.setText("SYNTAX ERROR");
+            outputArea.setText("NO MATCHER");
         }
     }
 
@@ -135,9 +135,9 @@ public class Analizer {
     public String spanish(String t) {
 
         if (t.contains("ASC")) {
-            return "ASCENDENTEMENTE";
+            return t.replace("ASC", "").trim() + " ASCENDENTEMENTE";
         } else if (t.contains("DESC")) {
-            return "DESCENDENTEMENTE";
+            return t.replace("DESC", "").trim() + " DESCENDENTEMENTE";
         } else {
             return t;
         }
@@ -165,9 +165,9 @@ public class Analizer {
         this.text = text;
     }
 
-    private final String A = "^(SELECT +(.)+ +FROM +\\w+) *$";
-    private final String B = "^(SELECT +(.)+ +FROM +\\w+) +ORDER +BY +\\w+ +(ASC|DESC) *$";
-    private final String C = "^(SELECT +(.)+ +FROM +\\w+) +WHERE +(\\w+ *= *(\\d+|\".+\")) *$";
-    private final String D = "^(SELECT +(.)+ +FROM +\\w+) +WHERE +(\\w+ *= *(\\d+|\".+\")) +ORDER +BY +\\w+ +(ASC|DESC) *$";
+    private final String A = "^(SELECT\\s+(.)+\\s+FROM\\s+\\w+)\\s*$";
+    private final String B = "^(SELECT\\s+(.)+\\s+FROM\\s+\\w+)\\s+ORDER\\s+BY\\s+\\w+\\s+(ASC|DESC)\\s*$";
+    private final String C = "^(SELECT\\s+(.)+\\s+FROM\\s+\\w+)\\s+WHERE\\s+(\\w+\\s*=\\s*(\\d+|\".+\"))\\s*$";
+    private final String D = "^(SELECT\\s+(.)+\\s+FROM\\s+\\w+)\\s+WHERE\\s+(\\w+\\s*=\\s*(\\d+|\".+\"))\\s+ORDER\\s+BY\\s+\\w+\\s+(ASC|DESC)\\s*$";
 
 }
