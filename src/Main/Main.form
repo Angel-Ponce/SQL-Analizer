@@ -39,7 +39,7 @@
         <Container class="javax.swing.JPanel" name="input">
           <Properties>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[720, 220]"/>
+              <Dimension value="[720, 234]"/>
             </Property>
             <Property name="requestFocusEnabled" type="boolean" value="false"/>
           </Properties>
@@ -85,7 +85,7 @@
         <Container class="javax.swing.JPanel" name="output">
           <Properties>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[360, 220]"/>
+              <Dimension value="[360, 234]"/>
             </Property>
           </Properties>
           <Constraints>
@@ -131,7 +131,7 @@
         <Container class="javax.swing.JPanel" name="table">
           <Properties>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[360, 220]"/>
+              <Dimension value="[360, 234]"/>
             </Property>
           </Properties>
           <Constraints>
@@ -206,9 +206,12 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="33" green="33" red="33" type="rgb"/>
             </Property>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/images/execute.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Execute"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[200, 30]"/>
+              <Dimension value="[200, 32]"/>
             </Property>
           </Properties>
           <Events>
@@ -228,9 +231,15 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Lucida Grande" size="18" style="1"/>
             </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/images/reset.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Reset"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[200, 30]"/>
+              <Dimension value="[200, 32]"/>
             </Property>
           </Properties>
           <Events>

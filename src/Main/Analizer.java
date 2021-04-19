@@ -2,6 +2,8 @@ package Main;
 
 import com.mysql.jdbc.PreparedStatement;
 import java.sql.SQLException;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.table.DefaultTableModel;
@@ -18,6 +20,8 @@ public class Analizer {
     public static final String WHERE = "WHERE";
     public static final String ASC = "ASC";
     public static final String DESC = "DESC";
+    public final ImageIcon success = new ImageIcon(getClass().getResource("/Images/success.png"));
+    public final ImageIcon error = new ImageIcon(getClass().getResource("/Images/error.png"));
 
     private String text;
     private JTextArea inputArea;
@@ -41,8 +45,10 @@ public class Analizer {
                         + "\t" + s.trim().replace(" ", "") + "\n"
                         + "DE LA TABLA\n"
                         + "\t" + t);
+                JOptionPane.showMessageDialog(null, "Build Successful", "Information", 0, success);
                 database(t, text.trim());
             } else {
+                JOptionPane.showMessageDialog(null, "Error Syntax", "Information", 0, error);
                 outputArea.setText(validateSelect(s.trim()));
             }
         } else if (text.trim().matches(B)) {
@@ -54,8 +60,10 @@ public class Analizer {
                         + "DE LA TABLA\n"
                         + "\t" + t + "\n"
                         + "ORDENAR " + spanish(text.replace(t, "").replace(s, "").replace("SELECT", "").replace("FROM", "").replace("ORDER", "").replace("BY", "").replace(" ", "")));
+                JOptionPane.showMessageDialog(null, "Build Successful", "Information", 0, success);
                 database(t, text.trim());
             } else {
+                JOptionPane.showMessageDialog(null, "Error Syntax", "Information", 0, error);
                 outputArea.setText(validateSelect(s.trim()));
             }
         } else if (text.trim().matches(C)) {
@@ -69,8 +77,10 @@ public class Analizer {
                         + "\t" + t + "\n"
                         + "DONDE\n"
                         + "\t" + w.trim());
+                JOptionPane.showMessageDialog(null, "Build Successful", "Information", 0, success);
                 database(t, text.trim());
             } else {
+                JOptionPane.showMessageDialog(null, "Error Syntax", "Information", 0, error);
                 outputArea.setText(validateSelect(s.trim()));
             }
         } else if (text.trim().matches(D)) {
@@ -85,11 +95,14 @@ public class Analizer {
                         + "DONDE\n"
                         + "\t" + w.trim() + "\n"
                         + "ORDENAR " + spanish(text.replace("SELECT", "").replace(s, "").replace("FROM", "").replace(t, "").replace("WHERE", "").replace(w, "").replace("ORDER", "").replace("BY", "").replace(" ", "")));
+                JOptionPane.showMessageDialog(null, "Build Successful", "Information", 0, success);
                 database(t, text.trim());
             } else {
+                JOptionPane.showMessageDialog(null, "Error Syntax", "Information", 0, error);
                 outputArea.setText(validateSelect(s.trim()));
             }
         } else {
+            JOptionPane.showMessageDialog(null, "Error Syntax", "Information", 0, error);
             outputArea.setText("NO MATCHER");
         }
     }

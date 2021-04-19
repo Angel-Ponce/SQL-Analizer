@@ -57,7 +57,7 @@ public class Main extends javax.swing.JFrame {
 
         container.setLayout(new java.awt.GridBagLayout());
 
-        input.setPreferredSize(new java.awt.Dimension(720, 220));
+        input.setPreferredSize(new java.awt.Dimension(720, 234));
         input.setRequestFocusEnabled(false);
         input.setLayout(new java.awt.GridLayout(1, 0));
 
@@ -79,7 +79,7 @@ public class Main extends javax.swing.JFrame {
         gridBagConstraints.weighty = 1.0;
         container.add(input, gridBagConstraints);
 
-        output.setPreferredSize(new java.awt.Dimension(360, 220));
+        output.setPreferredSize(new java.awt.Dimension(360, 234));
         output.setLayout(new java.awt.GridLayout(1, 0));
 
         outputArea.setEditable(false);
@@ -100,7 +100,7 @@ public class Main extends javax.swing.JFrame {
         gridBagConstraints.weighty = 1.0;
         container.add(output, gridBagConstraints);
 
-        table.setPreferredSize(new java.awt.Dimension(360, 220));
+        table.setPreferredSize(new java.awt.Dimension(360, 234));
         table.setLayout(new java.awt.GridLayout(1, 0));
 
         outputTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -147,8 +147,9 @@ public class Main extends javax.swing.JFrame {
         execute.setBackground(new java.awt.Color(102, 255, 102));
         execute.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
         execute.setForeground(new java.awt.Color(51, 51, 51));
+        execute.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/execute.png"))); // NOI18N
         execute.setText("Execute");
-        execute.setPreferredSize(new java.awt.Dimension(200, 30));
+        execute.setPreferredSize(new java.awt.Dimension(200, 32));
         execute.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 executeActionPerformed(evt);
@@ -163,8 +164,10 @@ public class Main extends javax.swing.JFrame {
 
         reset.setBackground(new java.awt.Color(255, 51, 51));
         reset.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
+        reset.setForeground(new java.awt.Color(255, 255, 255));
+        reset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/reset.png"))); // NOI18N
         reset.setText("Reset");
-        reset.setPreferredSize(new java.awt.Dimension(200, 30));
+        reset.setPreferredSize(new java.awt.Dimension(200, 32));
         reset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 resetActionPerformed(evt);
