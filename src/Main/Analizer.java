@@ -14,10 +14,10 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Analizer {
 
-    public static final String SELECT = "SELECT";
-    public static final String FROM = "FROM";
-    public static final String ORDERBY = "ORDER BY";
-    public static final String WHERE = "WHERE";
+    public static final String SELECCIONAR = "SELECCIONAR";
+    public static final String DE = "DE\\s+LA\\s+TABLA";
+    public static final String ORDENARPOR = "ORDENAR\\s+POR";
+    public static final String DONDE = "DONDE";
     public static final String ASC = "ASC";
     public static final String DESC = "DESC";
     public final ImageIcon success = new ImageIcon(getClass().getResource("/Images/success.png"));
@@ -38,8 +38,8 @@ public class Analizer {
     public void execute() {
         text = text.replaceAll("\n", " ");
         if (text.trim().matches(A)) {
-            String s = text.replaceAll("FROM.*", "").replace("SELECT", "");
-            String t = text.replace("SELECT", "").replace("FROM", "").replace(s, "");
+            String s = text.replaceAll("DE\\s+LA\\s+TABLA.*", "").replace("SELECCIONAR", "");
+            String t = text.replace("SELECCIONAR", "").replaceAll("DE\\s+LA\\s+TABLA", "").replace(s, "");
             if (validateSelect(s.trim()).isEmpty()) {
                 outputArea.setText("SELECCIONAR\n"
                         + "\t" + s.trim().replace(" ", "") + "\n"
@@ -52,14 +52,14 @@ public class Analizer {
                 outputArea.setText(validateSelect(s.trim()));
             }
         } else if (text.trim().matches(B)) {
-            String s = text.replaceAll("FROM.*", "").replace("SELECT", "");
-            String t = text.replace("SELECT", "").replace("FROM", "").replace(s, "").replaceAll("ORDER.*", "");
+            String s = text.replaceAll("DE\\s+LA\\s+TABLA.*", "").replace("SELECCIONAR", "");
+            String t = text.replace("SELECCIONAR", "").replaceAll("DE\\s+LA\\s+TABLA", "").replace(s, "").replaceAll("ORDENAR.*", "");
             if (validateSelect(s.trim()).isEmpty()) {
                 outputArea.setText("SELECCIONAR\n"
                         + "\t" + s.trim().replace(" ", "") + "\n"
                         + "DE LA TABLA\n"
                         + "\t" + t + "\n"
-                        + "ORDENAR " + spanish(text.replace(t, "").replace(s, "").replace("SELECT", "").replace("FROM", "").replace("ORDER", "").replace("BY", "").replace(" ", "")));
+                        + "ORDENAR " + spanish(text.replace(t, "").replace(s, "").replace("SELECCIONAR", "").replaceAll("DE\\s+LA\\s+TABLA", "").replace("ORDENAR", "").replace("POR", "").replace(" ", "")));
                 JOptionPane.showMessageDialog(null, "Build Successful", "Information", 0, success);
                 database(t, text.trim());
             } else {
@@ -67,9 +67,9 @@ public class Analizer {
                 outputArea.setText(validateSelect(s.trim()));
             }
         } else if (text.trim().matches(C)) {
-            String s = text.replaceAll("FROM.*", "").replace("SELECT", "");
-            String t = text.replace("SELECT", "").replace("FROM", "").replace(s, "").replaceAll("WHERE.*", "");
-            String w = text.replace(t, "").replace(s, "").replace("SELECT", "").replace("FROM", "").replace("WHERE", "");
+            String s = text.replaceAll("DE\\s+LA\\s+TABLA.*", "").replace("SELECCIONAR", "");
+            String t = text.replace("SELECCIONAR", "").replaceAll("DE\\s+LA\\s+TABLA", "").replace(s, "").replaceAll("DONDE.*", "");
+            String w = text.replace(t, "").replace(s, "").replace("SELECCIONAR", "").replaceAll("DE\\s+LA\\s+TABLA", "").replace("DONDE", "");
             if (validateSelect(s.trim()).isEmpty()) {
                 outputArea.setText("SELECCIONAR\n"
                         + "\t" + s.trim().replace(" ", "") + "\n"
@@ -84,9 +84,9 @@ public class Analizer {
                 outputArea.setText(validateSelect(s.trim()));
             }
         } else if (text.trim().matches(D)) {
-            String s = text.replaceAll("FROM.*", "").replace("SELECT", "");
-            String t = text.replace("SELECT", "").replace("FROM", "").replace(s, "").replaceAll("WHERE.*", "");
-            String w = text.replace(t, "").replace(s, "").replace("SELECT", "").replace("FROM", "").replace("WHERE", "").replaceAll("ORDER.*", "");
+            String s = text.replaceAll("DE\\s+LA\\s+TABLA.*", "").replace("SELECCIONAR", "");
+            String t = text.replace("SELECCIONAR", "").replaceAll("DE\\s+LA\\s+TABLA", "").replace(s, "").replaceAll("DONDE.*", "");
+            String w = text.replace(t, "").replace(s, "").replace("SELECCIONAR", "").replaceAll("DE\\s+LA\\s+TABLA", "").replace("DONDE", "").replaceAll("ORDENAR.*", "");
             if (validateSelect(s.trim()).isEmpty()) {
                 outputArea.setText("SELECCIONAR\n"
                         + "\t" + s.trim().replace(" ", "") + "\n"
@@ -94,7 +94,7 @@ public class Analizer {
                         + "\t" + t + "\n"
                         + "DONDE\n"
                         + "\t" + w.trim() + "\n"
-                        + "ORDENAR " + spanish(text.replace("SELECT", "").replace(s, "").replace("FROM", "").replace(t, "").replace("WHERE", "").replace(w, "").replace("ORDER", "").replace("BY", "").replace(" ", "")));
+                        + "ORDENAR " + spanish(text.replace("SELECCIONAR", "").replace(s, "").replaceAll("DE\\s+LA\\s+TABLA", "").replace(t, "").replace("DONDE", "").replace(w, "").replace("ORDENAR", "").replace("POR", "").replace(" ", "")));
                 JOptionPane.showMessageDialog(null, "Build Successful", "Information", 0, success);
                 database(t, text.trim());
             } else {
@@ -178,9 +178,9 @@ public class Analizer {
         this.text = text;
     }
 
-    private final String A = "^(SELECT\\s+(.)+\\s+FROM\\s+\\w+)\\s*$";
-    private final String B = "^(SELECT\\s+(.)+\\s+FROM\\s+\\w+)\\s+ORDER\\s+BY\\s+\\w+\\s+(ASC|DESC)\\s*$";
-    private final String C = "^(SELECT\\s+(.)+\\s+FROM\\s+\\w+)\\s+WHERE\\s+(\\w+\\s*=\\s*(\\d+|\".+\"))\\s*$";
-    private final String D = "^(SELECT\\s+(.)+\\s+FROM\\s+\\w+)\\s+WHERE\\s+(\\w+\\s*=\\s*(\\d+|\".+\"))\\s+ORDER\\s+BY\\s+\\w+\\s+(ASC|DESC)\\s*$";
+    private final String A = "^(SELECCIONAR\\s+(.)+\\s+DE\\s+LA\\s+TABLA\\s+\\w+)\\s*$";
+    private final String B = "^(SELECCIONAR\\s+(.)+\\s+DE\\s+LA\\s+TABLA\\s+\\w+)\\s+ORDENAR\\s+POR\\s+\\w+\\s+(ASC|DESC)\\s*$";
+    private final String C = "^(SELECCIONAR\\s+(.)+\\s+DE\\s+LA\\s+TABLA\\s+\\w+)\\s+DONDE\\s+(\\w+\\s*=\\s*(\\d+|\".+\"))\\s*$";
+    private final String D = "^(SELECCIONAR\\s+(.)+\\s+DE\\s+LA\\s+TABLA\\s+\\w+)\\s+DONDE\\s+(\\w+\\s*=\\s*(\\d+|\".+\"))\\s+ORDENAR\\s+POR\\s+\\w+\\s+(ASC|DESC)\\s*$";
 
 }
