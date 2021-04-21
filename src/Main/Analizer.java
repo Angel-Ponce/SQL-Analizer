@@ -110,6 +110,11 @@ public class Analizer {
     public void database(String table, String query) {
         if (table.trim().equals("usuario")) {
             Connecter c = new Connecter();
+            query = query.replace("SELECCIONAR", "SELECT")
+                    .replace("ORDENAR", "ORDER")
+                    .replace("POR", "BY")
+                    .replace("DONDE", "WHERE")
+                    .replaceAll(DE, "FROM");
             try {
                 c.conexion = c.getConexion();
                 c.ps = (PreparedStatement) c.conexion.prepareStatement(query);
