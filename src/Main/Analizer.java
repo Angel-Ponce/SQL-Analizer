@@ -162,7 +162,7 @@ public class Analizer {
     }
 
     public String validateSelect(String e) {
-        if (e.matches("\\w+")) {
+        if (e.matches("\\w+(\\.\\w+)?")) {
             return "";
         } else if (e.matches("\\*")) {
             return "";
